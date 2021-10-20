@@ -266,7 +266,7 @@ function Perto()
                                                 vehicleCoords.x, vehicleCoords.y,
                                                 vehicleCoords.z, true)
 
-        if (name == "Comet") and distance < 2.5 then
+        if (name == Config.Car) and distance < 2.5 then
             if not escadaNaMao then
                 DrawText3D(GetEntityCoords(vehicle).x, GetEntityCoords(vehicle).y, GetEntityCoords(vehicle).z + 1.5, Config.Locales["cogerescala"])
             else
@@ -295,7 +295,7 @@ function Perto()
                                                 vehicleCoords.x, vehicleCoords.y,
                                                 vehicleCoords.z, true)
 
-        if (name == "Comet") and distance < 2.5 then
+        if (name == Config.Car) and distance < 2.5 then
             if not escadaNaMao then
                 DrawText3D(GetEntityCoords(vehicle).x, GetEntityCoords(vehicle).y, GetEntityCoords(vehicle).z + 1.5, Config.Locales["cogerescala"])
             else
