@@ -2,8 +2,6 @@ Config = {}
 Config.distance = 1.5
 Config.Car = "comet2"
 Config.Plate = "ELECTRIC"
-Config.framework = "esx" -- Esx or qbcore, easy to adapt to your framework.
-
 Config.Pay = math.random(1000,4000)
 Config.Account = 'bank' --This is where the money is go.
 
