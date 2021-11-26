@@ -240,7 +240,7 @@ end)
 
 
 function Perto()
-    if Config.framework == 'esx' then 
+    if GetCurrentResourceState("es_extended") == "started" then 
 
         local ped = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(ped, false)
@@ -270,7 +270,7 @@ function Perto()
             return false
         end
 
-    elseif Config.framework == 'qbcore' then 
+    elseif GetCurrentResourceState("qb-core") == "started" then 
         local ped = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(ped, false)
         local px, py, pz = table.unpack(GetEntityCoords(PlayerPedId()))
@@ -305,7 +305,7 @@ end
 
 
 function ChangeClothes()
-    if Config.framework == 'esx' then 
+    if GetCurrentResourceState("es_extended") == "started" then 
         ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
             if skin.sex == 0 then
                 TriggerEvent('skinchanger:loadClothes', skin, Config.Clothes.male)
@@ -313,7 +313,7 @@ function ChangeClothes()
                 TriggerEvent('skinchanger:loadClothes', skin, Config.Clothes.female)
             end
         end)
-    elseif Config.framework == 'qbcore' then
+    elseif GetCurrentResourceState("qb-core") == "started" then
         local gender = QBCore.Functions.GetPlayerData().charinfo.gender
         if gender == 0 then
             TriggerEvent('qb-clothing:client:loadOutfit', Config.Uniforms.male)
@@ -325,11 +325,11 @@ end
 
 function GetClothes()
 
-    if Config.framework == 'esx' then 
+    if GetCurrentResourceState("es_extended") == "started" then 
         ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
             TriggerEvent('skinchanger:loadSkin', skin)
         end)
-    elseif Config.framework == 'qbcore' then
+    elseif GetCurrentResourceState("qb-core") == "started" then
         TriggerServerEvent('qb-clothes:loadPlayerSkin')
     end
 end
@@ -403,12 +403,12 @@ end
 
 function spawnCarJob(car)
 
-    if Config.framework == 'esx' then 
+    if GetCurrentResourceState("es_extended") == "started" then 
         ESX.Game.SpawnVehicle(Config.Car,vector3(-820.5, -748.1, 23.2), 79.89, function(veh)
             vehicle = veh
             SetVehicleNumberPlateText(veh, Config.Plate)
         end)
-    elseif Config.framework == 'qbcore' then 
+    elseif GetCurrentResourceState("qb-core") == "started" then 
         QBCore.Functions.SpawnVehicle(Config.Car, function(veh)
             vehicle = veh
             SetVehicleNumberPlateText(veh, Config.Plate)
