@@ -1,5 +1,5 @@
 if GetResourceState("es_extended") == "started" then
-	local ESX = exports["es_extended"]:getSharedObject
+	local ESX = exports["es_extended"]:getSharedObject()
 end
 if GetResourceState("qb-core") == "started" then
 	local QBCore = exports["qb-core"]:GetCoreObject()
