@@ -1,8 +1,16 @@
-if GetResourceState("es_extended") == "started" then
-	local ESX = exports["es_extended"]:getSharedObject()
-end
-if GetResourceState("qb-core") == "started" then
-	local QBCore = exports["qb-core"]:GetCoreObject()
+if Config.framework == 'esx' then 
+
+    ESX = nil
+
+    Citizen.CreateThread(function()
+        while ESX == nil do
+            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
+    end)
+
+elseif Config.framework == 'qbcore' then 
+    QBCore = exports['qb-core']:GetCoreObject()
 end
 
 
@@ -240,7 +248,7 @@ end)
 
 
 function Perto()
-    if GetResourceState("es_extended") == "started" then 
+    if Config.framework == 'esx' then 
 
         local ped = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(ped, false)
@@ -258,7 +266,7 @@ function Perto()
                                                 vehicleCoords.x, vehicleCoords.y,
                                                 vehicleCoords.z, true)
 
-        if (name == 'comet') and distance < 2.5 then
+        if (name == "Comet") and distance < 2.5 then
             if not escadaNaMao then
                 DrawText3D(GetEntityCoords(vehicle).x, GetEntityCoords(vehicle).y, GetEntityCoords(vehicle).z + 1.5, Config.Locales["cogerescala"])
             else
@@ -270,7 +278,7 @@ function Perto()
             return false
         end
 
-    elseif GetResourceState("qb-core") == "started" then 
+    elseif Config.framework == 'qbcore' then 
         local ped = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(ped, false)
         local px, py, pz = table.unpack(GetEntityCoords(PlayerPedId()))
@@ -287,7 +295,7 @@ function Perto()
                                                 vehicleCoords.x, vehicleCoords.y,
                                                 vehicleCoords.z, true)
 
-        if (name == 'comet') and distance < 2.5 then
+        if (name == "Comet") and distance < 2.5 then
             if not escadaNaMao then
                 DrawText3D(GetEntityCoords(vehicle).x, GetEntityCoords(vehicle).y, GetEntityCoords(vehicle).z + 1.5, Config.Locales["cogerescala"])
             else
@@ -305,7 +313,7 @@ end
 
 
 function ChangeClothes()
-    if GetResourceState("es_extended") == "started" then 
+    if Config.framework == 'esx' then 
         ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
             if skin.sex == 0 then
                 TriggerEvent('skinchanger:loadClothes', skin, Config.Clothes.male)
@@ -313,7 +321,7 @@ function ChangeClothes()
                 TriggerEvent('skinchanger:loadClothes', skin, Config.Clothes.female)
             end
         end)
-    elseif GetResourceState("qb-core") == "started" then
+    elseif Config.framework == 'qbcore' then
         local gender = QBCore.Functions.GetPlayerData().charinfo.gender
         if gender == 0 then
             TriggerEvent('qb-clothing:client:loadOutfit', Config.Uniforms.male)
@@ -325,11 +333,11 @@ end
 
 function GetClothes()
 
-    if GetResourceState("es_extended") == "started" then 
+    if Config.framework == 'esx' then 
         ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
             TriggerEvent('skinchanger:loadSkin', skin)
         end)
-    elseif GetResourceState("qb-core") == "started" then
+    elseif Config.framework == 'qbcore' then
         TriggerServerEvent('qb-clothes:loadPlayerSkin')
     end
 end
@@ -403,12 +411,12 @@ end
 
 function spawnCarJob(car)
 
-    if GetResourceState("es_extended") == "started" then 
+    if Config.framework == 'esx' then 
         ESX.Game.SpawnVehicle(Config.Car,vector3(-820.5, -748.1, 23.2), 79.89, function(veh)
             vehicle = veh
             SetVehicleNumberPlateText(veh, Config.Plate)
         end)
-    elseif GetResourceState("qb-core") == "started" then 
+    elseif Config.framework == 'qbcore' then 
         QBCore.Functions.SpawnVehicle(Config.Car, function(veh)
             vehicle = veh
             SetVehicleNumberPlateText(veh, Config.Plate)
