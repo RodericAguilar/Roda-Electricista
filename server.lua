@@ -14,6 +14,7 @@ AddEventHandler('Roda-Electricista:PayJob', function(money, can)
 end)
 
 
+
 elseif Config.framework == 'qbcore' then 
     local QBCore = exports['qb-core']:GetCoreObject()
 RegisterServerEvent('Roda-Electricista:PayJob')
